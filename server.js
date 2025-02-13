@@ -1,32 +1,15 @@
-// import 
-const express = require("express")
-const cors = require("cors")
-const getProducts = require("./product")
+// listen to Port & routes
+const dotenv = require("dotenv")
+dotenv.config()
+const app = require("./app")
+const PORT = process.env.PORT || 4000
 
-const app = express()
-app.use(cors())
 
-// http://localhost:4001/
-
-// listen to a PORT for a request
-app.listen(4001, ()=>{
-    console.log('Server is running on port 4000')
+app.listen(PORT, ()=>{
+    console.log(`server running on port ${PORT}`);
 })
 
-// create, read, update, delete
-app.get("/", getProducts)
 
-// http://localhost:4000/products
-app.get('/products', (req, res)=>{
-    res.json({
-       messaage: "prducts suscess"
-    })
-})
-
-app.get("/users", (req, res)=>{
-    res.send("All users")
-})
-
-app.post("/products", (req, res)=>{
-
-})
+// connect to database
+const connectToDb = require("./config/connectToDb")
+connectToDb()

@@ -1,7 +1,5 @@
-const getProducts = (req, res)=>{
-        res.send("welcome to amazon backend")
-    console.log("getting products...")
+const signUp = ()=>{
+    console.log("signing up...")
 }
 
-// default export
-module.exports = getProducts
+module.exports = signUp
