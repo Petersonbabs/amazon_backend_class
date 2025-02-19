@@ -14,7 +14,8 @@ const userShema = mongoose.Schema({
         type: String,
         required: true,
         min: 6,
-        max: 15
+        max: 15,
+        select: false
     },
     gender: {
         type: String,

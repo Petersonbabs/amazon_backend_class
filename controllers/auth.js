@@ -19,10 +19,15 @@ const signup = async (req, res)=>{
             return
         }
 
+        // const userWithoutPassword = {
+        //     name: user.name,
+        //     email: user.email
+        // }
+
         res.status(201).json({
             status: "success",
             message: "Signup successuful",
-            user
+            // user: userWithoutPassword
         })
     } catch (error) {
         console.error(error)
