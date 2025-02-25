@@ -22,19 +22,8 @@ const addProduct = async (req, res) =>{
     }
 }
 
-const deleteUser = (req, res)=>{
-    res.json({
-        messgae: "user deleted"
-    })
-}
 
-const greetUser = (req, res)=>{
-    console.log(req.boy);
-    res.send("Hello peter babs. welcome")
-}
 
 module.exports ={
-    addProduct,
-    deleteUser,
-    greetUser
+    addProduct
 }

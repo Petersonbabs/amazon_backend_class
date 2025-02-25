@@ -10,6 +10,10 @@ const userShema = mongoose.Schema({
         required:true,
         unique: true
     },
+    age: {
+        type: Number,
+        required:true
+    },
     password: {
         type: String,
         required: true,
@@ -21,6 +25,11 @@ const userShema = mongoose.Schema({
         type: String,
         enum: ["male", "female"],
         required: true
+    },
+    role: {
+        type: String,
+        enum: ["seller", "buyer"],
+        default: "buyer"
     },
     isVerified: {
         type: Boolean,
