@@ -1,6 +1,7 @@
 // CRUD - create, read, update, delete
 const UsersModel = require("../models/user")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 
 
@@ -32,10 +33,11 @@ const signup = async (req, res)=>{
 
 const login = async (req, res)=>{
     const {email, password} = req.body
+    console.log(req.body);
    
     try {
         // look for the user with this email
-        const user = await UsersModel.findOne({email})
+        const user = await UsersModel.findOne({email}).select("+password")
         if(!user){
             res.status(404).json({
                 status: "error",
@@ -54,9 +56,13 @@ const login = async (req, res)=>{
         }
 
         // generate token
+        const token = jwt.sign({email: user.email, id: user._id}, process.env.jwt_secret_key, {expiresIn: process.env.jwt_exp})
+        
+
         res.status(200).json({
             status: "success",
-            message: "login successful"
+            message: "login successful",
+            token
         })
 
     } catch (error) {

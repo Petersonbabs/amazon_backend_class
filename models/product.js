@@ -8,7 +8,12 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: String
+    },
+    seller: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
     }
+  
 })
 
 const Productmodel = mongoose.model("products", productSchema)

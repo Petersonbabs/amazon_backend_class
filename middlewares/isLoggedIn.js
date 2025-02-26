@@ -1,34 +1,27 @@
+const jwt = require("jsonwebtoken")
+const UserCollection = require("../models/user")
 
-const user = {
-    id: 1,
-    name: "John Doe",
-    email: "johndoe@example.com",
-    age: 25,
-    isActive: true,
-    address: {
-        street: "123 Main St",
-        city: "Los Angeles",
-        state: "CA",
-        zip: "90001",
-        country: "USA"
-    },
-    hobbies: ["reading", "coding", "traveling"],
-    createdAt: new Date().toISOString(),
-    role: "admin",
-    loggedIn: true
-};
+const isLoggedIn = async (req, res, next)=>{
+    let token;
+    // check if user has a Bearer token
+    if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
+        token = req.headers.authorization.split(" ")[1]
+    }
 
-
-
-const isLoggedIn = (req, res, next)=>{
-    console.log("you are in the logged in middleware")
-    if(!user.loggedIn){
+    if(!token){
         res.status(403).json({
-            status: "error",
-            message: "You must be logged in."
+            status:"error",
+            message: "Please provide token!"
         })
         return
     }
+
+    // check if token is valid
+    const decoded = jwt.decode(token, process.env.jwt_secret_key)
+    const user = await UserCollection.findById(decoded.id)
+    req.user = user
+
+    // move to the next middleware
     next()
 }
 
