@@ -1,8 +1,9 @@
 const Productmodel = require("../models/product")
+const sendEmail = require("../services/nodemailer/sendEmail")
 
 // add product 
 const addProduct = async (req, res) =>{
-    const {_id} = req.user 
+    const {_id, email, name} = req.user 
     try {
         const product = await Productmodel.create({...req.body, seller:_id})
         if(!product){
@@ -12,6 +13,8 @@ const addProduct = async (req, res) =>{
             })
             return
         }
+
+        sendEmail(email, name)
 
         res.status(201).json({
             status: "success",
