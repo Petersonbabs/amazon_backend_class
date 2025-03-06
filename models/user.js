@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 const userShema = mongoose.Schema({
     name: {
         type: String,
-        required: true,
     },
     email: {
         type: String,
@@ -12,12 +11,13 @@ const userShema = mongoose.Schema({
     },
     age: {
         type: Number,
-        required:true
+        required: [true, "Age is required"],
+        min: [18, "Age must be at least 18"]
     },
     password: {
         type: String,
-        required: true,
-        min: 6,
+        required: [true, "Password is required"],
+        minlength: [6, 'Password must be a minimum of 6 characters'],
         max: 15,
         select: false
     },

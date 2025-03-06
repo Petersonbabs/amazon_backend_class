@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 
 
 
-const signup = async (req, res)=>{
+const signup = async (req, res, next)=>{
     const {password} = req.body
     try {
         const salt = await bcrypt.genSalt(12)
@@ -28,6 +28,7 @@ const signup = async (req, res)=>{
         })
     } catch (error) {
         console.error(error)
+        next(error)
     }
 }
 
@@ -67,6 +68,7 @@ const login = async (req, res)=>{
 
     } catch (error) {
         console.log(error)
+        next(error)
     }
 }
 

@@ -17,7 +17,7 @@ const isLoggedIn = async (req, res, next)=>{
     }
 
     // check if token is valid
-    const decoded = jwt.decode(token, process.env.jwt_secret_key)
+    const decoded = jwt.verify(token, process.env.jwt_secret_key)
     const user = await UserCollection.findById(decoded.id)
     req.user = user
 
