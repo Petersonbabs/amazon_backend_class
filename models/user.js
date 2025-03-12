@@ -34,6 +34,10 @@ const userShema = mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    profilePic: {
+        type: String,
+        required:[true, "Profile picture is required!"]
     }
 })
 

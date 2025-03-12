@@ -4,8 +4,12 @@ const sendEmail = require("../services/nodemailer/sendEmail")
 // add product 
 const addProduct = async (req, res) =>{
     const {_id, email, name} = req.user 
+    if(!req.file){
+        res.json({message: "There's no file in your request"})
+        return
+    }
     try {
-        const product = await Productmodel.create({...req.body, seller:_id})
+        const product = await Productmodel.create({...req.body, seller:_id, image: req.file.path })
         if(!product){
             res.status(400).json({
                 status: "error",
