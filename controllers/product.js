@@ -5,7 +5,7 @@ const sendEmail = require("../services/nodemailer/sendEmail")
 const addProduct = async (req, res) =>{
     const {_id, email, name} = req.user 
     if(!req.file){
-        res.json({message: "There's no file in your request"})
+        res.status(400).json({status: "error", message: "There's no file in your request"})
         return
     }
     try {

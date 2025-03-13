@@ -1,15 +1,24 @@
-const multer = require("multer")
-const { CloudinaryStorage } = require("multer-storage-cloudinary")
+const multer = require('multer')  
+
+
+const { CloudinaryStorage } = require('multer-storage-cloudinary')
+
+
 const cloudinary = require("./cloudinary")
 
+
+
+
 const storage = new CloudinaryStorage({
-    cloudinary,
+    cloudinary: cloudinary, 
     params:{
-        folder: "sqi-uploads",
-        allowedFormats: ["jpeg", "jpg", "svg", "gif", "pdf", "mp4"]
+        folder: 'SQI_images',
+        allowedFormats: ['png','jpg','gif'], // optional 
+        transformation : [{width: 500, height:500 }] // resize image optional
     }
 })
 
-const upload = multer({storage})
+
+const upload = multer ( { storage})
 
 module.exports = upload
