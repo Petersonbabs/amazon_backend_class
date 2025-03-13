@@ -6,7 +6,7 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params:{
         folder: "sqi-uploads",
-        allowedFormats: ["jpeg", "png", "jpg", "svg", "gif", "pdf", "mp4"]
+        allowedFormats: ["jpeg", "jpg", "svg", "gif", "pdf", "mp4"]
     }
 })
 
