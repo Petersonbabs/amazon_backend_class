@@ -37,7 +37,7 @@ const userShema = mongoose.Schema({
     },
     profilePic: {
         type: String,
-        required:[true, "Profile picture is required!"]
+        // required:[true, "Profile picture is required!"]
     }
 })
 
